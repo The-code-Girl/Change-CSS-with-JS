@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Variable</title>
+
+    <style>
+        :root {
+            --spacing: 10px;
+            --blur: 10px;
+            --base: #ffc600;
+        }
+
+        img {
+            padding: var(--spacing);
+            background: var(--base);
+            filter: blur(var(--blur));
+
+        }
+
+        .h1 {
+            color: var(--base);
+        }
+
+        body {
+            text-align: center;
+            background: #193549;
+            color: white;
+            font-family: 'helvetica neue', sans-serif;
+            font-weight: 100;
+            font-size: 50px;
+        }
+
+        .controls {
+            margin-bottom: 50px;
+        }
+
+        input {
+            width: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Update CSS with the <span class="h1">JS</span></h2>
+    <div class="controls">
+
+        <label for="spacing">Spacing:</label>
+        <input type="range" id="spacing" name="spacing" min="10" max="200" data-sizing="px" value="10">
+
+        <label for="blur">Blur:</label>
+        <input type="range" id="blur" name="blur" min="0" max="20" data-sizing="px" value="10">
+
+        <label for="base">Base Color</label>
+        <input type="color" name="base" id="base" value="#ffc600">
+    </div>
+    <img src="featured-strong-piece-codes-781x439.webp">
+
+    <script>
+        const input = document.querySelectorAll('.controls input');
+
+        function handleUpdate() {
+            const suffix = this.dataset.sizing || '';
+            document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+
+        }
+
+        input.forEach(input => input.addEventListener('change', handleUpdate));
+        input.forEach(input => input.addEventListener('mousemove', handleUpdate));
+    </script>
+
+</body>
+
+</html>
